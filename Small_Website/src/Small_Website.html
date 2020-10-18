@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Small Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+
+<body>
+<div class="container-fluid">
+    <h3 class="text-center">BOOTSRAP AND JQUERY TEST</h3>
+    <div class="form-group">
+        <label for="usr">Github username:</label>
+        <input type="text" class="form-control" id="usr">
+    </div>
+    <button type="button" class="btn btn-primary btn-block">Get info</button>
+</div>
+
+
+
+<div class="container-fluid" id="tabla">
+    <h2>User data</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Location</th>
+            <th>Number of followers</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td id="name">-</td>
+            <td id="bio">-</td>
+            <td id="loc">-</td>
+            <td id="followers">-</td>
+    </table>
+    <script>
+    $("#tabla").hide();
+    </script>
+</div>
+
+</body>
+
+<script>
+
+var user;
+var url;
+$(document).ready(function(){
+    $("button").click(function(){
+        user = $("#usr").val();
+        var url = 'https://api.github.com/users/'+user;
+        $.get(url, function(data) {
+            var nom = data.name;
+            var bio = data.bio;
+            var location = data.location;
+            var Followers = data.followers;
+
+            $("#name").text(nom);
+            $("#bio").text(bio);
+            $("#loc").text(location);
+            $("#followers").text(Followers);
+        });
+    $("#tabla").show();
+    });
+});
+
+</script>
+</html>
